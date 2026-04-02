@@ -1,0 +1,656 @@
+<!--
+=================================================================
+OPTION 2: SQUARESPACE CODE BLOCK INJECTION
+Capelandia — Life at Sea Level
+
+HOW TO USE THIS FILE:
+1. In Squarespace, go to your Homepage
+2. Edit the page → delete ALL existing content blocks
+3. Add one "Code Block" (Insert > More > Code)
+4. Paste this ENTIRE file into the code block
+5. For the CSS override (STEP A below), go to:
+   Website > Pages > (gear icon on homepage) > Advanced > Page Header Code Injection
+   and paste the <style> block from STEP A there instead
+
+IMPORTANT — image URLs:
+Search this file for YOUR_*_URL and replace each with the
+actual URL of your uploaded image from Squarespace's asset manager.
+Upload images first via Design > File Storage, then copy each URL.
+=================================================================
+-->
+
+<!-- ============================================================
+STEP A: PASTE THIS IN PAGE HEADER CODE INJECTION
+(Website > Pages > gear on Homepage > Advanced > Page Header Code Injection)
+This CSS hides Squarespace's own nav/header/footer on this page only.
+============================================================ -->
+<style>
+/* Hide Squarespace's default header and footer on this page only */
+#header, .header, header.Header, .site-header,
+.Header, header[data-controller], #siteNavigation,
+.sqs-announcement-bar, .sqs-announcement-bar-dropzone,
+.nav-wrapper, .mobile-nav, footer.Footer, #footer,
+.Footer, footer[data-controller] {
+  display: none !important;
+}
+/* Remove body top padding Squarespace adds for its fixed nav */
+body { padding-top: 0 !important; margin-top: 0 !important; }
+/* Remove all Squarespace page padding */
+.sqs-layout .sqs-row .sqs-block { padding: 0 !important; }
+.page-section, .sqs-layout, .content-wrapper,
+.sqs-col-12, #page, .Main, main {
+  padding: 0 !important; margin: 0 !important; max-width: none !important;
+  width: 100% !important;
+}
+/* Ensure our code block goes edge-to-edge */
+.code-block, .sqs-block-code, .sqs-block-code .sqs-block-content {
+  padding: 0 !important; margin: 0 !important;
+  width: 100% !important; max-width: none !important;
+}
+</style>
+
+<!-- ============================================================
+STEP B: PASTE EVERYTHING BELOW INTO THE CODE BLOCK ON YOUR HOMEPAGE
+============================================================ -->
+
+<!-- Google Fonts (load before content) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* Scoped to our wrapper — prefixed cp- to avoid colliding with Squarespace */
+#cp-site * { box-sizing: border-box; }
+#cp-site {
+  --teal:        #2BBFB0;
+  --teal-dark:   #1A9E90;
+  --teal-deeper: #137B70;
+  --teal-pale:   #D6F2EF;
+  --navy:        #0D1F2D;
+  --navy-mid:    #17303F;
+  --navy-soft:   #1E4357;
+  --sand:        #E8C98A;
+  --sand-light:  #F5EDD6;
+  --sand-pale:   #FDFAF3;
+  --chalk:       #FAFCFC;
+  --ink:         #0D1F2D;
+  --mist:        #C4DDE0;
+  --wave1:       #1A6070;
+  --wave2:       #2B8E9A;
+  font-family: 'Outfit', sans-serif;
+  color: var(--ink);
+  background: var(--chalk);
+  overflow-x: hidden;
+  /* Pull block to true edges */
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative; left: 50%; right: 50%;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+}
+
+/* NAV */
+#cp-site .cp-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 4vw;
+  background: rgba(13,31,45,0.93);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(43,191,176,0.15);
+  transition: padding 0.3s;
+}
+#cp-site .cp-nav-logo img { height: 40px; display: block; }
+#cp-site .cp-nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+#cp-site .cp-nav-links a {
+  text-decoration: none; font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); transition: color 0.2s;
+}
+#cp-site .cp-nav-links a:hover { color: var(--teal); }
+#cp-site .cp-nav-cta {
+  padding: 0.5rem 1.3rem !important; border: 1px solid var(--teal) !important;
+  color: var(--teal) !important; border-radius: 2px;
+}
+#cp-site .cp-nav-cta:hover { background: rgba(43,191,176,0.1) !important; }
+
+/* HERO */
+#cp-site .cp-hero {
+  min-height: 100vh; background: var(--navy);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 8rem 4vw 5rem; position: relative; overflow: hidden;
+}
+#cp-site .cp-hero-waves { position: absolute; bottom: 0; left: 0; right: 0; height: 45%; pointer-events: none; }
+#cp-site .cp-hero-waves svg { width: 100%; height: 100%; }
+#cp-site .cp-rings { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+#cp-site .cp-rings span {
+  position: absolute; border-radius: 50%; border: 1px solid rgba(43,191,176,0.08);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  animation: cp-pulse 6s ease-in-out infinite;
+}
+#cp-site .cp-rings span:nth-child(1) { width:400px; height:400px; animation-delay:0s; }
+#cp-site .cp-rings span:nth-child(2) { width:620px; height:620px; animation-delay:0.8s; }
+#cp-site .cp-rings span:nth-child(3) { width:860px; height:860px; animation-delay:1.6s; }
+#cp-site .cp-rings span:nth-child(4) { width:1080px; height:1080px; animation-delay:2.4s; }
+@keyframes cp-pulse { 0%,100%{opacity:0.4} 50%{opacity:0.1} }
+
+#cp-site .cp-hero-logo {
+  width: min(320px,70vw); margin-bottom: 2rem; position: relative; z-index: 1;
+  filter: drop-shadow(0 0 40px rgba(43,191,176,0.2));
+}
+#cp-site .cp-tagline {
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 1.5rem; position: relative; z-index: 1;
+}
+#cp-site .cp-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 6vw, 5rem); font-weight: 300; line-height: 1.12;
+  color: white; margin-bottom: 1.4rem; position: relative; z-index: 1;
+}
+#cp-site .cp-headline em { font-style: italic; color: var(--sand); }
+#cp-site .cp-hero-sub {
+  font-size: 1rem; font-weight: 300; line-height: 1.75;
+  color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto 2.8rem;
+  position: relative; z-index: 1;
+}
+#cp-site .cp-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
+#cp-site .cp-btn-primary {
+  padding: 0.9rem 2.4rem; background: var(--teal); color: var(--navy);
+  text-decoration: none; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s; border-radius: 2px; display: inline-block;
+}
+#cp-site .cp-btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+#cp-site .cp-btn-ghost {
+  padding: 0.9rem 2.4rem; border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.75); text-decoration: none;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s; border-radius: 2px;
+}
+#cp-site .cp-btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+#cp-site .cp-scroll-cue {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem; z-index: 1;
+}
+#cp-site .cp-scroll-cue span { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+#cp-site .cp-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, rgba(43,191,176,0.6), transparent);
+  animation: cp-drop 2s ease-in-out infinite;
+}
+@keyframes cp-drop {
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform:scaleY(1);transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* MARQUEE */
+#cp-site .cp-marquee { overflow: hidden; background: var(--teal); padding: 0.85rem 0; }
+#cp-site .cp-marquee-track {
+  display: flex; animation: cp-marquee 30s linear infinite; width: max-content;
+}
+#cp-site .cp-marquee-item {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--navy); padding: 0 2.5rem;
+  display: flex; align-items: center; gap: 2.5rem; white-space: nowrap;
+}
+#cp-site .cp-marquee-item::after { content: '·'; font-size: 1rem; opacity: 0.4; }
+@keyframes cp-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ABOUT */
+#cp-site .cp-about { padding: 7rem 4vw; }
+#cp-site .cp-about-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.1fr; gap: 6rem; align-items: center;
+}
+#cp-site .cp-badge-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
+#cp-site .cp-hat-img { width: 100%; max-width: 420px; border-radius: 12px; display: block; }
+#cp-site .cp-badge {
+  position: absolute; bottom: -1.5rem; right: -1rem;
+  background: var(--navy); border: 1px solid rgba(43,191,176,0.3);
+  padding: 1.2rem 1.6rem; text-align: center; min-width: 130px;
+}
+#cp-site .cp-badge-num {
+  font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300;
+  color: var(--teal); line-height: 1;
+}
+#cp-site .cp-badge-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+#cp-site .cp-eyebrow {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--teal); display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.2rem;
+}
+#cp-site .cp-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--teal); }
+#cp-site .cp-h2 {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 300;
+  line-height: 1.2; color: var(--navy); margin-bottom: 1.3rem;
+}
+#cp-site .cp-h2 em { font-style: italic; color: var(--teal-dark); }
+#cp-site .cp-p { font-size: 0.97rem; font-weight: 300; line-height: 1.85; color: var(--navy); opacity: 0.72; margin-bottom: 1rem; }
+
+/* SHOP */
+#cp-site .cp-shop { background: var(--navy); padding: 7rem 4vw; }
+#cp-site .cp-shop-inner { max-width: 1200px; margin: 0 auto; }
+#cp-site .cp-shop-hdr {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem;
+}
+#cp-site .cp-shop-hdr .cp-h2 { color: white; margin-bottom: 0; }
+#cp-site .cp-shop-hdr .cp-h2 em { color: var(--sand); }
+#cp-site .cp-shop-all {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(43,191,176,0.3); padding-bottom: 2px;
+}
+#cp-site .cp-shop-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; }
+#cp-site .cp-prod {
+  background: var(--navy-mid); overflow: hidden; cursor: pointer;
+  text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: background 0.25s;
+}
+#cp-site .cp-prod:hover { background: var(--navy-soft); }
+#cp-site .cp-prod-img { aspect-ratio:1; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+#cp-site .cp-prod-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+#cp-site .cp-prod:hover .cp-prod-img img { transform:scale(1.04); }
+#cp-site .cp-prod-info { padding:1.4rem 1.6rem 1.6rem; flex:1; display:flex; flex-direction:column; }
+#cp-site .cp-prod-name { font-size:0.95rem; font-weight:400; color:rgba(255,255,255,0.9); margin-bottom:0.4rem; }
+#cp-site .cp-prod-price { font-size:0.82rem; font-weight:300; color:var(--teal); margin-bottom:auto; }
+#cp-site .cp-prod-cta { display:inline-block; margin-top:1rem; font-size:0.7rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--teal); opacity:0; transition:opacity 0.2s; }
+#cp-site .cp-prod:hover .cp-prod-cta { opacity:1; }
+#cp-site .cp-prod.featured { grid-row:span 2; }
+#cp-site .cp-prod.featured .cp-prod-img { aspect-ratio:auto; flex:1; min-height:300px; }
+
+/* OBH */
+#cp-site .cp-obh { padding:7rem 4vw; background:var(--sand-pale); position:relative; overflow:hidden; }
+#cp-site .cp-obh::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(to right,var(--teal),var(--teal-dark),var(--wave1)); }
+#cp-site .cp-obh-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+#cp-site .cp-obh-badge { display:inline-flex; align-items:center; gap:0.6rem; background:var(--teal-pale); border:1px solid rgba(43,191,176,0.3); padding:0.4rem 1rem; border-radius:2px; margin-bottom:1.5rem; }
+#cp-site .cp-obh-badge span { font-size:0.68rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal-deeper); }
+#cp-site .cp-stats { display:flex; gap:2.5rem; margin:2rem 0; padding:1.5rem 0; border-top:1px solid rgba(13,31,45,0.1); border-bottom:1px solid rgba(13,31,45,0.1); }
+#cp-site .cp-stat-num { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; color:var(--teal-dark); line-height:1; }
+#cp-site .cp-stat-label { font-size:0.72rem; font-weight:400; color:var(--navy); opacity:0.5; margin-top:0.2rem; }
+#cp-site .cp-obh-cards { display:flex; flex-direction:column; gap:1.5rem; }
+#cp-site .cp-obh-card { background:var(--navy); padding:2.2rem 2rem; border-left:3px solid var(--teal); }
+#cp-site .cp-obh-card-title { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:400; color:white; margin-bottom:0.6rem; }
+#cp-site .cp-obh-card-text { font-size:0.85rem; font-weight:300; line-height:1.75; color:rgba(255,255,255,0.55); }
+#cp-site .cp-obh-link { display:inline-block; margin-top:1rem; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(43,191,176,0.3); padding-bottom:2px; }
+
+/* LIFESTYLE */
+#cp-site .cp-life { padding:7rem 4vw; max-width:1200px; margin:0 auto; }
+#cp-site .cp-life-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5px; margin-top:3rem; }
+#cp-site .cp-tile { aspect-ratio:1; overflow:hidden; position:relative; background:var(--navy-soft); }
+#cp-site .cp-tile:first-child { grid-column:span 2; aspect-ratio:2/1; }
+#cp-site .cp-tile img { width:100%; height:100%; object-fit:cover; filter:saturate(0.9); transition:transform 0.5s; }
+#cp-site .cp-tile:hover img { transform:scale(1.04); filter:saturate(1.1); }
+#cp-site .cp-tile-ov { position:absolute; inset:0; background:linear-gradient(to top,rgba(13,31,45,0.5),transparent 50%); opacity:0; transition:opacity 0.3s; }
+#cp-site .cp-tile:hover .cp-tile-ov { opacity:1; }
+#cp-site .cp-insta { display:flex; align-items:center; gap:0.6rem; margin-top:1.5rem; }
+#cp-site .cp-insta a { font-size:0.78rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal); text-decoration:none; }
+
+/* CONTACT */
+#cp-site .cp-contact { background:var(--navy); padding:7rem 4vw; position:relative; overflow:hidden; }
+#cp-site .cp-contact::after { content:'CAPELANDIA'; position:absolute; bottom:-3rem; right:-2rem; font-family:'Cormorant Garamond',serif; font-size:clamp(5rem,12vw,14rem); font-weight:600; color:rgba(43,191,176,0.04); pointer-events:none; white-space:nowrap; }
+#cp-site .cp-contact-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+#cp-site .cp-contact .cp-h2 { color:white; }
+#cp-site .cp-contact .cp-h2 em { color:var(--sand); }
+#cp-site .cp-contact .cp-eyebrow { color:var(--teal); }
+#cp-site .cp-contact .cp-eyebrow::before { background:var(--teal); }
+#cp-site .cp-contact .cp-p { color:rgba(255,255,255,0.5); }
+#cp-site .cp-contact-detail { display:flex; gap:0.8rem; align-items:flex-start; margin-top:1.5rem; }
+#cp-site .cp-contact-icon { width:36px; height:36px; flex-shrink:0; border:1px solid rgba(43,191,176,0.25); display:flex; align-items:center; justify-content:center; }
+#cp-site .cp-contact-icon svg { width:14px; height:14px; }
+#cp-site .cp-contact-text { font-size:0.85rem; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.6; }
+#cp-site .cp-contact-text a { color:var(--teal); text-decoration:none; }
+#cp-site .cp-form { display:flex; flex-direction:column; gap:1rem; }
+#cp-site .cp-form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+#cp-site .cp-field { display:flex; flex-direction:column; gap:0.35rem; }
+#cp-site .cp-label { font-size:0.65rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+#cp-site .cp-field input, #cp-site .cp-field select, #cp-site .cp-field textarea {
+  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+  padding:0.75rem 1rem; color:white;
+  font-family:'Outfit',sans-serif; font-size:0.88rem; font-weight:300;
+  outline:none; border-radius:2px; transition:border-color 0.2s;
+}
+#cp-site .cp-field input::placeholder, #cp-site .cp-field textarea::placeholder { color:rgba(255,255,255,0.2); }
+#cp-site .cp-field input:focus, #cp-site .cp-field select:focus, #cp-site .cp-field textarea:focus { border-color:var(--teal); }
+#cp-site .cp-field select option { background:var(--navy); }
+#cp-site .cp-field textarea { resize:vertical; min-height:110px; }
+#cp-site .cp-submit {
+  margin-top:0.5rem; align-self:flex-start; padding:1rem 2.5rem;
+  background:var(--teal); color:var(--navy); border:none;
+  font-family:'Outfit',sans-serif; font-size:0.76rem; font-weight:700;
+  letter-spacing:0.18em; text-transform:uppercase; cursor:pointer; border-radius:2px;
+  transition:background 0.2s, transform 0.2s;
+}
+#cp-site .cp-submit:hover { background:var(--teal-dark); transform:translateY(-1px); }
+
+/* FOOTER */
+#cp-site .cp-footer { background:#080F14; padding:3.5rem 4vw 2rem; }
+#cp-site .cp-footer-top { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem; padding-bottom:2.5rem; border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:2rem; }
+#cp-site .cp-footer-logo img { height:36px; opacity:0.85; }
+#cp-site .cp-footer-links { display:flex; gap:2rem; flex-wrap:wrap; }
+#cp-site .cp-footer-links a { text-decoration:none; font-size:0.72rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.28); transition:color 0.2s; }
+#cp-site .cp-footer-links a:hover { color:var(--teal); }
+#cp-site .cp-social { display:flex; gap:0.8rem; }
+#cp-site .cp-social-btn { width:36px; height:36px; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; text-decoration:none; border-radius:2px; transition:border-color 0.2s; }
+#cp-site .cp-social-btn:hover { border-color:var(--teal); background:rgba(43,191,176,0.08); }
+#cp-site .cp-social-btn svg { width:14px; height:14px; fill:rgba(255,255,255,0.45); transition:fill 0.2s; }
+#cp-site .cp-social-btn:hover svg { fill:var(--teal); }
+#cp-site .cp-footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+#cp-site .cp-copy { font-size:0.7rem; letter-spacing:0.06em; color:rgba(255,255,255,0.18); }
+#cp-site .cp-footer-tag { font-family:'Cormorant Garamond',serif; font-size:0.88rem; font-style:italic; color:rgba(255,255,255,0.2); }
+
+/* Reveal animations */
+#cp-site .cp-reveal { opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s ease; }
+#cp-site .cp-reveal.visible { opacity:1; transform:none; }
+#cp-site .cp-d1 { transition-delay:0.1s; }
+#cp-site .cp-d2 { transition-delay:0.22s; }
+#cp-site .cp-d3 { transition-delay:0.36s; }
+#cp-site .cp-d4 { transition-delay:0.5s; }
+
+/* Responsive */
+@media(max-width:900px) {
+  #cp-site .cp-about-grid { grid-template-columns:1fr; gap:3rem; }
+  #cp-site .cp-badge { display:none; }
+  #cp-site .cp-shop-grid { grid-template-columns:1fr 1fr; }
+  #cp-site .cp-prod.featured { grid-row:span 1; }
+  #cp-site .cp-prod.featured .cp-prod-img { min-height:auto; }
+  #cp-site .cp-obh-inner { grid-template-columns:1fr; gap:3rem; }
+  #cp-site .cp-life-grid { grid-template-columns:1fr 1fr; }
+  #cp-site .cp-tile:first-child { grid-column:span 2; }
+  #cp-site .cp-contact-inner { grid-template-columns:1fr; gap:3rem; }
+  #cp-site .cp-form-row { grid-template-columns:1fr; }
+  #cp-site .cp-footer-top { flex-direction:column; align-items:flex-start; }
+  #cp-site .cp-nav-links { display:none; }
+}
+@media(max-width:600px) {
+  #cp-site .cp-shop-grid { grid-template-columns:1fr; }
+  #cp-site .cp-life-grid { grid-template-columns:1fr; }
+  #cp-site .cp-tile:first-child { grid-column:span 1; aspect-ratio:1; }
+  #cp-site .cp-rings { display:none; }
+}
+</style>
+
+<!-- ==================== HTML ==================== -->
+<!-- IMPORTANT: Replace all YOUR_*_URL placeholders with your actual image URLs from Squarespace File Storage -->
+
+<div id="cp-site">
+
+  <!-- NAV -->
+  <nav class="cp-nav" id="cp-nav">
+    <a href="#cp-top" class="cp-nav-logo">
+      <img src="YOUR_LOGO_WHITE_CIRCLE_URL" alt="Capelandia">
+    </a>
+    <ul class="cp-nav-links">
+      <li><a href="#cp-about">About</a></li>
+      <li><a href="#cp-shop">Shop</a></li>
+      <li><a href="#cp-obh">Give Back</a></li>
+      <li><a href="#cp-contact" class="cp-nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cp-hero" id="cp-top">
+    <div class="cp-rings"><span></span><span></span><span></span><span></span></div>
+    <img src="YOUR_LOGO_WHITE_CIRCLE_URL" alt="Capelandia" class="cp-hero-logo cp-reveal">
+    <p class="cp-tagline cp-reveal cp-d1">Life at Sea Level</p>
+    <h1 class="cp-headline cp-reveal cp-d2">Coastal living,<br><em>with purpose.</em></h1>
+    <p class="cp-hero-sub cp-reveal cp-d3">Welcome to Capelandia — where the relaxed beach vibe meets a playful spirit of community and conservation. Inspired by Cape Cod. Built for the ocean life.</p>
+    <div class="cp-btns cp-reveal cp-d4">
+      <a href="#cp-shop" class="cp-btn-primary">Shop the Collection</a>
+      <a href="#cp-about" class="cp-btn-ghost">Our Story</a>
+    </div>
+    <div class="cp-hero-waves">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,180 C240,240 480,100 720,160 C960,220 1200,80 1440,140 L1440,320 L0,320 Z" fill="#137B70" opacity="0.25"/>
+        <path d="M0,200 C200,160 400,240 640,200 C880,160 1100,240 1440,200 L1440,320 L0,320 Z" fill="#1A9E90" opacity="0.18"/>
+        <path d="M0,230 C300,200 500,260 800,230 C1100,200 1280,260 1440,240 L1440,320 L0,320 Z" fill="#2BBFB0" opacity="0.12"/>
+      </svg>
+    </div>
+    <div class="cp-scroll-cue"><span>Scroll</span><div class="cp-scroll-line"></div></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="cp-marquee">
+    <div class="cp-marquee-track">
+      <span class="cp-marquee-item">Life at Sea Level</span>
+      <span class="cp-marquee-item">Cape Cod</span>
+      <span class="cp-marquee-item">Coastal Living</span>
+      <span class="cp-marquee-item">Ocean Conservation</span>
+      <span class="cp-marquee-item">Community &amp; Purpose</span>
+      <span class="cp-marquee-item">Explore Your Lifestyle</span>
+      <span class="cp-marquee-item">Our Blue Horizons</span>
+      <span class="cp-marquee-item">Cape Cod, USA</span>
+      <span class="cp-marquee-item">Life at Sea Level</span>
+      <span class="cp-marquee-item">Cape Cod</span>
+      <span class="cp-marquee-item">Coastal Living</span>
+      <span class="cp-marquee-item">Ocean Conservation</span>
+      <span class="cp-marquee-item">Community &amp; Purpose</span>
+      <span class="cp-marquee-item">Explore Your Lifestyle</span>
+      <span class="cp-marquee-item">Our Blue Horizons</span>
+      <span class="cp-marquee-item">Cape Cod, USA</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="cp-about" id="cp-about">
+    <div class="cp-about-grid">
+      <div class="cp-badge-wrap cp-reveal">
+        <img src="YOUR_HAT_PHOTO_URL" alt="Capelandia lifestyle" class="cp-hat-img">
+        <div class="cp-badge"><div class="cp-badge-num">10%</div><div class="cp-badge-label">Of profits donated</div></div>
+      </div>
+      <div>
+        <div class="cp-eyebrow cp-reveal">Who We Are</div>
+        <h2 class="cp-h2 cp-reveal cp-d1">More than a brand —<br><em>a celebration.</em></h2>
+        <p class="cp-p cp-reveal cp-d2">Welcome to Capelandia, where the relaxed beach vibe meets a playful spirit of community and conservation. Inspired by the laid-back charm of Cape Cod and infused with a touch of humor, Capelandia is more than a lifestyle brand — it's a celebration of coastal living with purpose.</p>
+        <p class="cp-p cp-reveal cp-d2">We believe the ocean deserves our respect, our protection, and our joy. Every piece we make is a small act of love for the place we call home.</p>
+        <div style="margin-top:2rem;" class="cp-reveal cp-d3">
+          <a href="#cp-shop" class="cp-btn-primary">Explore the Shop</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="cp-shop" id="cp-shop">
+    <div class="cp-shop-inner">
+      <div class="cp-shop-hdr">
+        <div>
+          <div class="cp-eyebrow cp-reveal" style="color:var(--teal);">Wear the Cape</div>
+          <h2 class="cp-h2 cp-reveal cp-d1">The <em>Collection</em></h2>
+        </div>
+        <a href="https://www.capelandia.com/shop" target="_blank" class="cp-shop-all cp-reveal cp-d2">View All →</a>
+      </div>
+      <div class="cp-shop-grid">
+        <a href="https://www.capelandia.com/shop" target="_blank" class="cp-prod featured cp-reveal">
+          <div class="cp-prod-img"><img src="YOUR_APPAREL_PHOTO_URL" alt="Capelandia Tee"></div>
+          <div class="cp-prod-info">
+            <div class="cp-prod-name">The Capelandia Tee</div>
+            <div class="cp-prod-price">From $35.00</div>
+            <div style="font-size:0.82rem;font-weight:300;color:rgba(255,255,255,0.45);line-height:1.65;margin-top:0.5rem;">Mauve Triblend, Dusty Blue, Oatmeal &amp; Solid Slate.</div>
+            <div class="cp-prod-cta">Shop Now →</div>
+          </div>
+        </a>
+        <a href="https://www.capelandia.com/shop/p/product-2-5c6mb-j8mng-6a7y9" target="_blank" class="cp-prod cp-reveal cp-d1">
+          <div class="cp-prod-img" style="background:linear-gradient(135deg,#17303F,#1A4357);display:flex;align-items:center;justify-content:center;">
+            <img src="YOUR_LOGO_DARK_URL" alt="Maine Tote" style="width:55%;height:auto;object-fit:contain;opacity:0.3;">
+          </div>
+          <div class="cp-prod-info">
+            <div class="cp-prod-name">The Maine Zippered Cotton Tote</div>
+            <div class="cp-prod-price">$14.00</div>
+            <div class="cp-prod-cta">Add to Cart →</div>
+          </div>
+        </a>
+        <a href="https://www.capelandia.com/shop/p/product-3-szb2y-gzh2r-zdt58" target="_blank" class="cp-prod cp-reveal cp-d2">
+          <div class="cp-prod-img" style="background:linear-gradient(135deg,#2B8E9A,#137B70);display:flex;align-items:center;justify-content:center;">
+            <img src="YOUR_LOGO_DARK_URL" alt="Everyday Tote" style="width:55%;height:auto;object-fit:contain;opacity:0.3;">
+          </div>
+          <div class="cp-prod-info">
+            <div class="cp-prod-name">Everyday Tote</div>
+            <div class="cp-prod-price">$8.00</div>
+            <div class="cp-prod-cta">Add to Cart →</div>
+          </div>
+        </a>
+        <a href="https://www.capelandia.com/shop" target="_blank" class="cp-prod cp-reveal cp-d3" style="border:1px dashed rgba(43,191,176,0.2);">
+          <div class="cp-prod-img" style="background:linear-gradient(135deg,#1E4357,#1A6070);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;padding:2rem;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="rgba(43,191,176,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><line x1="16" y1="10" x2="16" y2="22" stroke="rgba(43,191,176,0.5)" stroke-width="1.5" stroke-linecap="round"/><line x1="10" y1="16" x2="22" y2="16" stroke="rgba(43,191,176,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span style="font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);">More coming</span>
+          </div>
+          <div class="cp-prod-info">
+            <div class="cp-prod-name" style="color:rgba(255,255,255,0.35);">New Arrivals</div>
+            <div class="cp-prod-price" style="color:rgba(43,191,176,0.4);">Coming Soon</div>
+            <div class="cp-prod-cta">Browse Shop →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBH -->
+  <section class="cp-obh" id="cp-obh">
+    <div class="cp-obh-inner">
+      <div>
+        <div class="cp-obh-badge cp-reveal">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="#137B70" stroke-width="1.5" fill="none"/><path d="M4 7 L6.2 9.2 L10 5" stroke="#137B70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Certified Giving Partner</span>
+        </div>
+        <div class="cp-eyebrow cp-reveal cp-d1">Give Back</div>
+        <h2 class="cp-h2 cp-reveal cp-d1">We support <em>ocean conservation</em><br>&amp; education.</h2>
+        <p class="cp-p cp-reveal cp-d2">With every Capelandia purchase, you're doing more than wearing the Cape — you're helping protect it. Capelandia donates <strong>10% of all profits</strong> to Our Blue Horizons Inc., a registered 501(c)(3) nonprofit based in Falmouth, MA.</p>
+        <p class="cp-p cp-reveal cp-d2">Their mission: unlocking the ocean's mysteries through inspiration, education, and innovation.</p>
+        <div class="cp-stats cp-reveal cp-d3">
+          <div><div class="cp-stat-num">10%</div><div class="cp-stat-label">of all profits donated</div></div>
+          <div><div class="cp-stat-num">501c3</div><div class="cp-stat-label">registered nonprofit</div></div>
+          <div><div class="cp-stat-num" style="font-size:1.8rem;">Falmouth<br>MA</div><div class="cp-stat-label">locally rooted</div></div>
+        </div>
+        <div class="cp-reveal cp-d3">
+          <a href="https://www.ourbluehorizons.org" target="_blank" class="cp-btn-primary" style="background:var(--teal-dark);">Visit Our Blue Horizons →</a>
+        </div>
+      </div>
+      <div class="cp-obh-cards">
+        <div class="cp-obh-card cp-reveal cp-d1">
+          <div class="cp-obh-card-title">Project SHARK</div>
+          <div class="cp-obh-card-text">Students Harnessing Aquatic Research &amp; Knowledge — taking youth onto the water with ROVs, real data, and working scientists.</div>
+          <a href="https://www.ourbluehorizons.org/projects" target="_blank" class="cp-obh-link">Learn More →</a>
+        </div>
+        <div class="cp-obh-card cp-reveal cp-d2">
+          <div class="cp-obh-card-title">Marine Science &amp; Discovery</div>
+          <div class="cp-obh-card-text">Empowering communities to become stewards of marine ecosystems and champions of global environmental sustainability.</div>
+          <a href="https://www.ourbluehorizons.org" target="_blank" class="cp-obh-link">Get Involved →</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;padding:1.2rem 1.5rem;border:1px solid rgba(13,31,45,0.12);background:white;" class="cp-reveal cp-d3">
+          <img src="https://static.wixstatic.com/media/b56b26_883340b0f90445879b769e0a3b4ffd7d~mv2.png/v1/fill/w_516,h_51,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b56b26_883340b0f90445879b769e0a3b4ffd7d~mv2.png" alt="Our Blue Horizons" style="height:28px;width:auto;">
+          <span style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(13,31,45,0.45);border-left:1px solid rgba(13,31,45,0.12);padding-left:1rem;">Proud Partner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE -->
+  <section class="cp-life">
+    <div class="cp-eyebrow cp-reveal">Follow Along</div>
+    <h2 class="cp-h2 cp-reveal cp-d1">Life <em>on the Cape</em></h2>
+    <p class="cp-p cp-reveal cp-d2" style="max-width:480px;">Follow @capelandia.inc on Instagram for coastal life, product drops, and ocean moments from Cape Cod.</p>
+    <div class="cp-life-grid cp-reveal cp-d2">
+      <div class="cp-tile" style="grid-column:span 2;aspect-ratio:2/1;">
+        <img src="https://images.squarespace-cdn.com/content/v1/691b35c50a072c13dae80a2b/ae2edf0f-7074-4824-af07-e118c1fcecc1/IMG_3566.jpeg" alt="Cape Cod lifestyle">
+        <div class="cp-tile-ov"></div>
+      </div>
+      <div class="cp-tile"><img src="https://images.squarespace-cdn.com/content/v1/691b35c50a072c13dae80a2b/02CEB12D-4108-4313-8613-DA0FEE4BCAE0.jpeg" alt="Cape Cod"><div class="cp-tile-ov"></div></div>
+      <div class="cp-tile"><img src="https://images.squarespace-cdn.com/content/v1/691b35c50a072c13dae80a2b/22b3ee0f-b3b9-4d78-8a71-6c42439665c4/IMG_0781.jpeg" alt="Cape Cod life"><div class="cp-tile-ov"></div></div>
+      <div class="cp-tile" style="background:linear-gradient(135deg,#1E4357,#1A6070);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem;text-align:center;padding:2rem;">
+        <img src="YOUR_FAVICON_URL" alt="Capelandia" style="width:56px;height:56px;object-fit:contain;opacity:0.55;">
+        <span style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Life at sea level</span>
+      </div>
+      <div class="cp-tile"><img src="https://images.squarespace-cdn.com/content/v1/691b35c50a072c13dae80a2b/6f8529cc-a47c-488f-a2a8-71e88c6a0194/IMG_3969.jpeg" alt="Cape Cod water"><div class="cp-tile-ov"></div></div>
+    </div>
+    <div class="cp-insta cp-reveal cp-d3">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#2BBFB0" stroke-width="1.8" fill="none"/><circle cx="12" cy="12" r="4" stroke="#2BBFB0" stroke-width="1.8" fill="none"/><circle cx="17.5" cy="6.5" r="1" fill="#2BBFB0"/></svg>
+      <a href="https://www.instagram.com/capelandia.inc/" target="_blank">Follow @capelandia.inc</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="cp-contact" id="cp-contact">
+    <div class="cp-contact-inner">
+      <div>
+        <div class="cp-eyebrow cp-reveal">Get in Touch</div>
+        <h2 class="cp-h2 cp-reveal cp-d1">We'd love to<br><em>hear from you.</em></h2>
+        <p class="cp-p cp-reveal cp-d2">Questions about the shop, wholesale inquiries, partnerships, or just want to say hey from the Cape?</p>
+        <div class="cp-contact-detail cp-reveal cp-d2">
+          <div class="cp-contact-icon"><svg viewBox="0 0 16 16"><path d="M2 4l6 4 6-4M2 4v8h12V4H2z" stroke="rgba(43,191,176,0.9)" stroke-width="1.4" fill="none" stroke-linejoin="round"/></svg></div>
+          <div class="cp-contact-text"><a href="mailto:capelandialife@gmail.com">capelandialife@gmail.com</a></div>
+        </div>
+        <div class="cp-contact-detail cp-reveal cp-d3">
+          <div class="cp-contact-icon"><svg viewBox="0 0 16 16"><circle cx="8" cy="7" r="3" stroke="rgba(43,191,176,0.9)" stroke-width="1.4" fill="none"/><path d="M8 1C5 1 2.5 3.5 2.5 7c0 4 5.5 8 5.5 8s5.5-4 5.5-8c0-3.5-2.5-6-5.5-6z" stroke="rgba(43,191,176,0.9)" stroke-width="1.4" fill="none"/></svg></div>
+          <div class="cp-contact-text">Cape Cod, USA</div>
+        </div>
+      </div>
+      <div class="cp-form cp-reveal cp-d2">
+        <div class="cp-form-row">
+          <div class="cp-field"><label class="cp-label">First Name</label><input type="text" placeholder="Your name"></div>
+          <div class="cp-field"><label class="cp-label">Email</label><input type="email" placeholder="you@example.com"></div>
+        </div>
+        <div class="cp-field">
+          <label class="cp-label">Subject</label>
+          <select>
+            <option value="">Select a topic</option>
+            <option>Order / Product Question</option>
+            <option>Wholesale Inquiry</option>
+            <option>Partnership / Collaboration</option>
+            <option>Our Blue Horizons</option>
+            <option>Just saying hi!</option>
+          </select>
+        </div>
+        <div class="cp-field"><label class="cp-label">Message</label><textarea placeholder="Tell us what's on your mind..."></textarea></div>
+        <button class="cp-submit">Send Message →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="cp-footer">
+    <div class="cp-footer-top">
+      <div class="cp-footer-logo"><img src="YOUR_LOGO_WHITE_CIRCLE_URL" alt="Capelandia"></div>
+      <div class="cp-footer-links">
+        <a href="https://www.capelandia.com/shop" target="_blank">Shop</a>
+        <a href="#cp-about">About</a>
+        <a href="#cp-obh">Give Back</a>
+        <a href="https://www.ourbluehorizons.org" target="_blank">Our Blue Horizons</a>
+        <a href="#cp-contact">Contact</a>
+      </div>
+      <div class="cp-social">
+        <a href="https://www.instagram.com/capelandia.inc/" target="_blank" class="cp-social-btn">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="cp-footer-bottom">
+      <div class="cp-copy">© 2025 Capelandia Inc. · Cape Cod, USA · All rights reserved.</div>
+      <div class="cp-footer-tag">Life at Sea Level</div>
+    </div>
+  </footer>
+
+</div><!-- end #cp-site -->
+
+<script>
+(function(){
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.cp-reveal').forEach(function(el){ io.observe(el); });
+
+  // Hero immediate reveal
+  setTimeout(function(){
+    document.querySelectorAll('.cp-hero .cp-reveal').forEach(function(el){ el.classList.add('visible'); });
+  }, 80);
+
+  // Nav shrink on scroll
+  var nav = document.getElementById('cp-nav');
+  window.addEventListener('scroll', function(){
+    if(nav) nav.style.padding = window.scrollY > 60 ? '0.65rem 4vw' : '1rem 4vw';
+  });
+})();
+</script>
